@@ -1,0 +1,61 @@
+#include<iostream>
+/*
+-------------------------------Algo----------------------------------
+1->take input call for quickSort()
+2->let a pivot index from partision()
+3->recursiove call for left and right portion w r t pivote
+partision()
+1first el is a pivote
+count for number whic are less than pivot 
+sawap
+travers from start and end and put the element at right position
+
+
+
+*/
+using namespace std;
+int partision(int* arr,int s,int e)
+{
+    int p=arr[s];
+    int count=0;
+    for (int i =s+1; i <=e ; i++)
+    {
+        if(p>arr[i])
+        count++;
+    }
+    int pivIndex=s+count;
+    swap(arr[s],arr[pivIndex]);
+    int i=s,j=e;
+    while (i<pivIndex &&j>pivIndex)
+    {
+      while(arr[i]<=arr[pivIndex])
+       i++;
+       while(arr[j]>=arr[pivIndex])
+       j--;
+       if (i<pivIndex &&j>pivIndex)
+       swap(arr[i++],arr[j--]);
+    }
+    
+    return pivIndex;
+}
+void quickSort(int * arr,int s,int e)
+{
+  if(s>=e)
+  return;
+  int pivote=partision(arr,s,e);
+  quickSort(arr,s,pivote-1);
+  quickSort(arr,pivote+1,e);
+}
+int main()
+{
+    int arr[10]={9,8,7,6,1,2,3,4,56,5};
+    int size=10;
+    quickSort(arr,0,size-1);
+    for (int  i = 0; i < size; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    
+    return 0;
+
+}
